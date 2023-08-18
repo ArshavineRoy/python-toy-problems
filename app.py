@@ -8,7 +8,7 @@ class App:
         self.root.geometry("800x500")
         self.root.title("Python Toy Problems")
 
-                # 1. 24-HOUR TIME CONVERTER
+        # 1. TIME CONVERTER
         self.label = tk.Label(self.root, text="Time Converter", font=('Arial', 14, "bold"))
         self.label.pack(padx=10,pady=10)
 
@@ -29,6 +29,13 @@ class App:
         self.convert_time_button.pack(side='left', pady=10)
 
         self.input_frame.pack()
+
+            # Output
+            # labels can have their own variables
+        self.time_output_str = tk.StringVar() # store & update the result of the time conversion 
+        
+        self.time_output = tk.Label(self.root, text="12:08", font=('Arial', 12, 'bold'), fg='red', textvariable=self.time_output_str)
+        self.time_output.pack()
 
 
 
