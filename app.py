@@ -1,4 +1,5 @@
 import tkinter as tk
+from datetime import datetime
 
 
 class App:
@@ -8,7 +9,7 @@ class App:
         self.root.geometry("800x500")
         self.root.title("Python Toy Problems")
 
-        # 1. TIME CONVERTER
+        # 1. TIME CONVERTER UI
         self.label = tk.Label(self.root, text="Time Converter", font=('Arial', 14, "bold"))
         self.label.pack(padx=10,pady=10)
 
@@ -38,6 +39,23 @@ class App:
         self.time_output.pack()
 
 
+    # Time converter functionality
+    def convert_time(self):
+        try:
+            time = self.time_entry.get()
+            converted_time = self.time_converter(time)
+
+            self.time_output_str.set(f'Time in 24-hour format: {converted_time}')
+            
+        except ValueError:
+            self.time_output_str.set("Please use the correct time format.") # MESSAGE BOX
+
+
+    def time_converter(self, time):
+
+        parsed_time = datetime.strptime(time, '%I:%M %p')
+
+        return parsed_time.strftime('%H:%M')
 
 
 
