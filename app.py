@@ -1,5 +1,6 @@
 import tkinter as tk
 from datetime import datetime
+from tkinter import messagebox
 
 
 class App:
@@ -9,7 +10,7 @@ class App:
         self.root.geometry("800x500")
         self.root.title("Python Toy Problems")
 
-        # 1. TIME CONVERTER UI
+        # 1. TIME CONVERTER GUI
         self.label = tk.Label(self.root, text="Time Converter", font=('Arial', 14, "bold"))
         self.label.pack(padx=10,pady=10)
 
@@ -39,7 +40,21 @@ class App:
         self.time_output.pack()
 
 
-    # Time converter functionality
+
+        # Bind on_close method to main window closing to customize the closing event: 'Do you want to quit?' dialog box.
+        self.root.protocol("WM_DELETE_WINDOW", self.on_close)
+
+
+
+    # LOGIC
+
+    # Method for prompting user for confirmation on closing the main window
+    def on_close(self):
+        if messagebox.askyesno(title="", message="Do you want to quit this application?"):
+            self.root.destroy()     # Destroy main window if yes is selected
+
+
+    # 1. Time conversion logic
     def convert_time(self):
         try:
             time = self.time_entry.get()
