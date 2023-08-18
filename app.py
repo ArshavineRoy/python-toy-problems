@@ -15,6 +15,23 @@ class App:
         self.description = tk.Label(self.root, text="A time converter that seamlessly converts time from 12-hour format to 24-hour format. \n Please enter time in 12-hour format below, e.g., 12:08 am", font=('Arial', 11))
         self.description.pack()
 
+            # input field & button frame
+        self.input_frame = tk.Frame(self.root)
+
+            # input field & state management
+        self.time_entry = tk.StringVar() # stores and updates str values, more like useState in React. 
+
+        self.user_entry = tk.Entry(self.input_frame, font=('Arial', 12), textvariable=self.time_entry) # Connect to Entry widget to state manager, self.time_entry, via textvariable
+        self.user_entry.pack(side='left', padx=10, pady=10)
+
+            # convert time button
+        self.convert_time_button = tk.Button(self.input_frame, text="Convert Time", command=self.convert_time) #command=self.show_message -- for displaying messages
+        self.convert_time_button.pack(side='left', pady=10)
+
+        self.input_frame.pack()
+
+
+
 
 
 if __name__ == "__main__":
