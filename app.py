@@ -23,7 +23,7 @@ class App:
             # input field & state management
         self.time_entry = tk.StringVar() # stores and updates str values, more like useState in React. 
 
-        self.user_entry = tk.Entry(self.input_frame, font=('Arial', 12), textvariable=self.time_entry) # Connect to Entry widget to state manager, self.time_entry, via textvariable
+        self.user_entry = tk.Entry(self.input_frame, font=('Arial', 16), textvariable=self.time_entry) # Connect to Entry widget to state manager, self.time_entry, via textvariable
         self.user_entry.pack(side='left', padx=10, pady=10)
 
             # convert time button
@@ -53,32 +53,37 @@ class App:
         self.positives_frame.rowconfigure(1, weight=1)
         self.positives_frame.rowconfigure(2, weight=1)
 
+        self.input_a = tk.StringVar()
         self.label1 = tk.Label(self.positives_frame, text="a:", font=('Arial', 16))
-        self.entry1 = tk.Entry(self.positives_frame, font=('Arial', 16), width=8)
+        self.entry1 = tk.Entry(self.positives_frame, font=('Arial', 16), width=8, textvariable=self.input_a)
         self.label1.grid(row=0, column=0, pady=4)
         self.entry1.grid(row=0, column=1, pady=4, padx=3)
+        
 
+        self.input_b = tk.StringVar()
         self.label2 = tk.Label(self.positives_frame, text="b:", font=('Arial', 16))
-        self.entry2 = tk.Entry(self.positives_frame, font=('Arial', 16), width=8)
+        self.entry2 = tk.Entry(self.positives_frame, font=('Arial', 16), width=8, textvariable=self.input_b)
         self.label2.grid(row=1, column=0, pady=4)
         self.entry2.grid(row=1, column=1, pady=4, padx=3)
-
+        
+        self.input_c = tk.StringVar()
         self.label3 = tk.Label(self.positives_frame, text="c:", font=('Arial', 16))
-        self.entry3 = tk.Entry(self.positives_frame, font=('Arial', 16), width=8)
+        self.entry3 = tk.Entry(self.positives_frame, font=('Arial', 16), width=8, textvariable=self.input_c)
         self.label3.grid(row=2, column=0, pady=4)
         self.entry3.grid(row=2, column=1, pady=4, padx=3)
 
+
         self.positives_frame.pack()
 
-            # Output
+            # Positives Output
         self.bool_output_state = tk.StringVar() # store & update the result 
         
-        self.bool_output = tk.Label(self.root, text=True, font=('Arial', 16, 'bold'), fg='blue', textvariable=self.bool_output_state)
+        self.bool_output = tk.Label(self.root, text='True', font=('Arial', 12, 'bold'), fg='blue', textvariable=self.bool_output_state)
         self.bool_output.pack(pady=4)
 
             # Two Positives Button
-        self.button = tk.Button(self.root, text="Two Positives?", bg='#a3e635', activebackground='#e879f9')
-        self.button.pack(pady=10)
+        self.button = tk.Button(self.root, text="Two Positives?", bg='#a3e635', activebackground='#e879f9', command=self.positive_numbers)
+        self.button.pack(pady=(2, 5))
 
 
         # Bind on_close method to main window closing to customize the closing event: 'Do you want to quit?' dialog box.
@@ -111,6 +116,27 @@ class App:
         parsed_time = datetime.strptime(time, '%I:%M %p')
 
         return parsed_time.strftime('%H:%M')
+
+
+    # 2. Two positives logic
+
+    def positive_numbers(self):
+        try:
+            a = int(self.input_a.get())
+            b = int(self.input_b.get())
+            c = int(self.input_c.get())
+            
+            result = self.calculate_positives(a, b, c)
+            self.bool_output_state.set(result)
+
+        except ValueError:
+            self.bool_output_state.set("Please enter integer values only!")
+    
+    def calculate_positives(self, a, b, c):
+        matches = [num for num in [a, b, c]  if num > 0]
+        return 'True' if len(matches) == 2 else 'False'
+
+
 
 
 
