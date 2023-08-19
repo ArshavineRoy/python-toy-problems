@@ -90,8 +90,33 @@ class App:
         self.label = tk.Label(self.root, text="Highest Constant Value", font=('Arial', 14, "bold"))
         self.label.pack(padx=10,pady=(8, 5))
 
-        self.consonants_description = tk.Label(self.root, text="Easily get the highest value of consonant substrings. Consonants are any letters of the alphabet except 'aeiou'. \n For example, the word 'strength' results to 57. \n The consonant substrings, 'str' = 19 + 20 + 18 = 57 \n and 'ngth'= 14 + 7 + 20 + 8 = 49. The highest is 57.", font=('Arial', 11))
+        self.consonants_description = tk.Label(self.root, text="Easily get the highest value of consonant substrings. Consonants are any letters of the alphabet except 'aeiou'. \n For example, in the word 'strength', the consonant substrings 'str' = 19 + 20 + 18 = 57 \n and 'ngth'= 14 + 7 + 20 + 8 = 49. The highest is 57.", font=('Arial', 11))
         self.consonants_description.pack()
+
+            # Consonants input field + button
+        self.consonants_input_frame = tk.Frame(self.root)
+
+            # input field & button frame
+        self.consonant_frame = tk.Frame(self.root)
+
+            # input field & state management
+        self.string_entry_state = tk.StringVar() # stores and updates str values, more like useState in React. 
+
+        self.string_entry = tk.Entry(self.consonant_frame, font=('Arial', 16), textvariable=self.string_entry_state) 
+        self.string_entry.pack(side='left', padx=10, pady=10)
+
+            # Consonant button
+        self.consonant_button = tk.Button(self.consonant_frame, text="Calculate Value", bg='#a3e635', activebackground='#e879f9')
+        self.consonant_button.pack(side='left', pady=10)
+
+        self.consonant_frame.pack()
+
+            # Consonant Output
+        self.consonant_output_str = tk.StringVar() # store & update the result of the time conversion 
+        
+        self.consonant_output = tk.Label(self.root, text="12:08", font=('Arial', 12, 'bold'), fg='red', textvariable=self.consonant_output_str)
+        self.consonant_output.pack(pady=(20, 0))
+
 
         # Bind on_close method to main window closing to customize the closing event: 'Do you want to quit?' dialog box.
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
