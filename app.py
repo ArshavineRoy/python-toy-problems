@@ -1,6 +1,7 @@
 import tkinter as tk
 from datetime import datetime
 from tkinter import messagebox
+import re
 
 
 class App:
@@ -42,9 +43,9 @@ class App:
 
         # 2.  Positive Number Checker
         self.label = tk.Label(self.root, text="Two Positives Checker", font=('Arial', 14, "bold"))
-        self.label.pack(padx=10, pady=(30, 10))
+        self.label.pack(padx=10, pady=(20, 10))
 
-        self.positives_description = tk.Label(self.root, text="An algorith that compares three integers a, b, and c and returns True \n if exactly two of them are positive numbers, and False otherwise. \n Enter three integers below.", font=('Arial', 11))
+        self.positives_description = tk.Label(self.root, text="An algorithm that compares three integers a, b, and c and returns True \n if exactly two of them are positive numbers, and False otherwise. \n Enter three integers below.", font=('Arial', 11))
         self.positives_description.pack(pady=2)
 
             # Positives labels and entry fields
@@ -82,13 +83,13 @@ class App:
         self.bool_output.pack(pady=4)
 
             # Two Positives Button
-        self.button = tk.Button(self.root, text="Two Positives?", bg='#a3e635', activebackground='#e879f9', command=self.positive_numbers)
+        self.button = tk.Button(self.root, text="Exactly Two Positives?", bg='#a3e635', activebackground='#e879f9', command=self.positive_numbers)
         self.button.pack(pady=(2, 5))
 
 
         # 3. HIGHEST CONSONANT VALUE GUI
-        self.label = tk.Label(self.root, text="Highest Constant Value", font=('Arial', 14, "bold"))
-        self.label.pack(padx=10,pady=(8, 5))
+        self.label = tk.Label(self.root, text="Highest Consonant Value", font=('Arial', 14, "bold"))
+        self.label.pack(padx=10,pady=(30, 10))
 
         self.consonants_description = tk.Label(self.root, text="Easily get the highest value of consonant substrings. Consonants are any letters of the alphabet except 'aeiou'. \n For example, in the word 'strength', the consonant substrings 'str' = 19 + 20 + 18 = 57 \n and 'ngth'= 14 + 7 + 20 + 8 = 49. The highest is 57.", font=('Arial', 11))
         self.consonants_description.pack()
@@ -106,7 +107,7 @@ class App:
         self.string_entry.pack(side='left', padx=10, pady=10)
 
             # Consonant button
-        self.consonant_button = tk.Button(self.consonant_frame, text="Calculate Value", bg='#a3e635', activebackground='#e879f9')
+        self.consonant_button = tk.Button(self.consonant_frame, text="Calculate Value", bg='#a3e635', activebackground='#e879f9', command=self.highest_consonant)
         self.consonant_button.pack(side='left', pady=10)
 
         self.consonant_frame.pack()
@@ -167,9 +168,35 @@ class App:
     def calculate_positives(self, a, b, c):
         matches = [num for num in [a, b, c]  if num > 0]
         return 'True' if len(matches) == 2 else 'False'
+    
+    # 3. Highest consonant value logic
 
+    def highest_consonant(self):
+        string = self.string_entry_state.get()
+        self.calculate_value(string)
 
+    def calculate_value(self, string):
+        try:
+            if string:
+                substrings = re.findall(r"[^aeiou\d\W]+", string.lower())
 
+                substring_totals = []
+
+                for substring in substrings:
+                    total_unicode = 0
+                    for char in substring:
+                        total_unicode += (ord(char) - 96)
+                    substring_totals.append(total_unicode)
+
+                highest_value = max(substring_totals)
+
+                self.consonant_output_str.set(f'The highest consonant substring value in your entry is {highest_value}')
+
+            else:
+                self.consonant_output_str.set("Oops! You entered an empty string!")
+        except ValueError:
+            self.consonant_output_str.set("You must enter a string!")
+        
 
 
 if __name__ == "__main__":
