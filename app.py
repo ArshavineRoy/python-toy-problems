@@ -7,7 +7,7 @@ class App:
     def __init__(self, root):
         self.root = root
 
-        self.root.geometry("800x700")
+        self.root.geometry("800x750")
         self.root.title("Python Toy Problems")
 
         # 1. TIME CONVERTER GUI
@@ -85,6 +85,13 @@ class App:
         self.button = tk.Button(self.root, text="Two Positives?", bg='#a3e635', activebackground='#e879f9', command=self.positive_numbers)
         self.button.pack(pady=(2, 5))
 
+
+        # 3. HIGHEST CONSONANT VALUE GUI
+        self.label = tk.Label(self.root, text="Highest Constant Value", font=('Arial', 14, "bold"))
+        self.label.pack(padx=10,pady=(8, 5))
+
+        self.consonants_description = tk.Label(self.root, text="Easily get the highest value of consonant substrings. Consonants are any letters of the alphabet except 'aeiou'. \n For example, the word 'strength' results to 57. \n The consonant substrings, 'str' = 19 + 20 + 18 = 57 \n and 'ngth'= 14 + 7 + 20 + 8 = 49. The highest is 57.", font=('Arial', 11))
+        self.consonants_description.pack()
 
         # Bind on_close method to main window closing to customize the closing event: 'Do you want to quit?' dialog box.
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
