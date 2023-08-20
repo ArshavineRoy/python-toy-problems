@@ -13,7 +13,7 @@ This repo contains three toy problems solved using Python. The problems are desc
 
 A Tkinter v.8.6 GUI has been build and the script has been bundled into an executable file for Linux & macOS.
 
-![GUI](/python-toy-problems/GUI.png)
+![GUI](GUI.png)
 
 ## Prerequisites
 
@@ -40,6 +40,8 @@ cd python-toy-problems
 ```
 
 ### 4. Alternatively, open the `dist` folder and double-click `app` to run the script
+
+### 5. Code solutions for all toy problems can be found in the `toy-problems` directory
 
 ## Deliverables
 ### 1: Converting 12-hour time to 24-hour time
